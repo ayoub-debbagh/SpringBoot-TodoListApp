@@ -20,7 +20,10 @@
             <#list tasks as task>
 
                 <li class="border-b py-2 flex justify-between items-center">
-                    <span>${task.title}</span>
+                    <!-- Apply strikethrough to completed tasks -->
+                    <span class="${task.completed?string('line-through text-gray-500', 'text-gray-800')}">
+                        ${task.title}
+                    </span>
                     <div>
                         <a href="/tasks/edit/${task.id}" class="text-blue-500 hover:text-blue-700 mr-4">Edit</a>
                         <a href="/tasks/delete/${task.id}" class="text-red-500 hover:text-red-700">Delete</a>

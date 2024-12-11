@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -16,12 +18,12 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<Task> getAllTasks() {
-        return taskRepository.findAll();
+        return StreamSupport.stream(taskRepository.findAll().spliterator(), false).toList();
     }
 
     @Override
-    public Task getTaskById(Long id) {
-        return taskRepository.findById(id).orElse(null);
+    public Optional<Task> getTaskById(Long id) {
+        return taskRepository.findById(id);
     }
 
     @Override
